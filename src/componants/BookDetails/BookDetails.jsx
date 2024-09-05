@@ -1,10 +1,41 @@
 import PropTypes from 'prop-types';
 import { useLoaderData } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const notify = () => toast('You Already read this book');
+const notify2 = () => toast('Already in your wishlist');
+
+const getRead = (id) => {
+  const read = JSON.parse(localStorage.getItem('read')) || [];
+  const wish = JSON.parse(localStorage.getItem('wish')) || [];
+  const updateWish = wish.filter((idd) => id != idd);
+  localStorage.setItem('wish', JSON.stringify(updateWish));
+
+  if (read.includes(id)) {
+    notify();
+  } else {
+    read.push(id);
+    localStorage.setItem('read', JSON.stringify(read));
+  }
+};
+const getWish = (id) => {
+  const wish = JSON.parse(localStorage.getItem('wish')) || [];
+  const read = JSON.parse(localStorage.getItem('read')) || [];
+  if (read.includes(id)) {
+    notify();
+  } else if (wish.includes(id)) {
+    notify2();
+  } else {
+    wish.push(id);
+    localStorage.setItem('wish', JSON.stringify(wish));
+  }
+};
 
 const BookDetails = () => {
   const book = useLoaderData();
   const {
-    // bookId,
+    bookId,
     bookName,
     author,
     image,
@@ -74,14 +105,21 @@ const BookDetails = () => {
         </div>
 
         <div className="mt-10 mb-3 ms-3">
-          <a className="btn btn-lg  py-3 inline btn-ghost text-[#23BE0A] border-[#23BE0A] text-white me-4">
+          <a
+            onClick={() => getRead(bookId)}
+            className="btn btn-lg  py-3 inline btn-ghost text-[#23BE0A] border-[#23BE0A]  me-4"
+          >
             Read
           </a>
-          <a className="btn btn-lg  py-3 inline  bg-[#59C6D2] text-white">
+          <a
+            onClick={() => getWish(bookId)}
+            className="btn btn-lg  py-3 inline  bg-[#59C6D2] text-white"
+          >
             Wishlist
           </a>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
