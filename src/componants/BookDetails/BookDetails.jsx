@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const notify = () => toast('You Already read this book');
+const notifyRead = () => toast('Your book added in the read list');
+const notifyWish = () => toast('Your book added in the wish list');
 const notify2 = () => toast('Already in your wishlist');
 
 const getRead = (id) => {
@@ -15,6 +17,7 @@ const getRead = (id) => {
   if (read.includes(id)) {
     notify();
   } else {
+    notifyRead();
     read.push(id);
     localStorage.setItem('read', JSON.stringify(read));
   }
@@ -27,6 +30,7 @@ const getWish = (id) => {
   } else if (wish.includes(id)) {
     notify2();
   } else {
+    notifyWish();
     wish.push(id);
     localStorage.setItem('wish', JSON.stringify(wish));
   }
@@ -135,7 +139,7 @@ BookDetails.propTypes = {
       .isRequired,
     category: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
+  }),
 };
 
 export default BookDetails;
