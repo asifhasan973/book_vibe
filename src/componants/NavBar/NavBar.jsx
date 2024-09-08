@@ -7,7 +7,6 @@ const NavBar = () => {
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
@@ -48,9 +47,9 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-3xl font-black playfair-display">
-          <Link to="/">Book Vibe</Link>
-        </a>
+        <Link to="/">
+          <a className="btn btn-ghost text-3xl font-black">Book Vibe</a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menuuu menu-horizontal ">

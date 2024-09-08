@@ -14,9 +14,9 @@ const Home = () => {
     <div>
       {/* banner  */}
       <div className="flex flex-col lg:flex-row bg-[#1313130D] w-11/12 mx-auto mt-12 py-16 rounded-3xl">
-        <div className="flex-1 flex items-center flex-col justify-center ms-16">
+        <div className="flex-1 flex items-center flex-col justify-center lg:ms-16">
           <div className="text-center mb-16 lg:mb-0 lg:text-start">
-            <h1 className="text-6xl lg:text-8xl font-black">
+            <h1 className="text-5xl lg:text-8xl font-black">
               Books to freshen up your bookshelf
             </h1>
             <button>

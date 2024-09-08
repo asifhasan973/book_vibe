@@ -7,6 +7,7 @@ const ListedBooks = () => {
   const [readBooks, setReadBooks] = useState([]);
   const [wishBooks, setWishBooks] = useState([]);
   const [displayBooks, setDisplayBooks] = useState([]);
+  const [dataOfDisplay, setDataOfDisplay] = useState([]);
 
   const read = JSON.parse(localStorage.getItem('read')) || [];
   const wish = JSON.parse(localStorage.getItem('wish')) || [];
@@ -28,13 +29,30 @@ const ListedBooks = () => {
 
     setReadBooks(newArray);
     setWishBooks(newArray2);
-    newArray;
+    setDisplayBooks(newArray);
+    setDataOfDisplay(newArray);
   }, []);
 
   const handleSetBooks = (books) => {
-    // const sortedBooks = books.sort((a, b) => a.title.localeCompare(b.title));
-    // setDisplayBooks(sortedBooks);
     setDisplayBooks(books);
+  };
+
+  const handleRating = (dataOfDisplay) => {
+    const sortedBooks = [...dataOfDisplay].sort((a, b) => a.rating - b.rating);
+    setDisplayBooks(sortedBooks);
+  };
+
+  const handleYear = (dataOfDisplay) => {
+    const sortedBooks = [...dataOfDisplay].sort(
+      (a, b) => a.yearOfPublishing - b.yearOfPublishing
+    );
+    setDisplayBooks(sortedBooks);
+  };
+  const handlePages = (dataOfDisplay) => {
+    const sortedBooks = [...dataOfDisplay].sort(
+      (a, b) => a.totalPages - b.totalPages
+    );
+    setDisplayBooks(sortedBooks);
   };
 
   return (
@@ -50,10 +68,15 @@ const ListedBooks = () => {
             </summary>
             <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
               <li>
-                <a>Publishing Year</a>
+                <a onClick={() => handleYear(dataOfDisplay)}>
+                  By Publishing Year
+                </a>
               </li>
               <li>
-                <a>Rating</a>
+                <a onClick={() => handleRating(dataOfDisplay)}>By Rating</a>
+              </li>
+              <li>
+                <a onClick={() => handlePages(dataOfDisplay)}>By Pages</a>
               </li>
             </ul>
           </details>
@@ -70,7 +93,10 @@ const ListedBooks = () => {
           className="tab font-black"
           aria-label="Read Books"
           defaultChecked
-          onClick={() => handleSetBooks(readBooks)}
+          onClick={() => {
+            handleSetBooks(readBooks);
+            setDataOfDisplay(readBooks);
+          }}
         />
         <div
           role="tabpanel"
@@ -85,7 +111,9 @@ const ListedBooks = () => {
           role="tab"
           className="tab font-black"
           aria-label="Wishlist Books"
-          onClick={() => handleSetBooks(wishBooks)}
+          onClick={() => {
+            handleSetBooks(wishBooks), setDataOfDisplay(wishBooks);
+          }}
         />
         <div
           role="tabpanel"

@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 const DisplayBooks = ({ displayBooks }) => {
-  console.log(displayBooks);
-
   return (
     <div className="space-y-10 w-10/12 mx-auto mt-6">
       {displayBooks.map((book) => (

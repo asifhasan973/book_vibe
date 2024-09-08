@@ -29,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/pagesToRead',
         element: <PagesToRead></PagesToRead>,
+        loader: () =>
+          fetch(
+            'https://raw.githubusercontent.com/asifhasan973/All_jsons/main/book_review.json'
+          ),
       },
       {
         path: '/bookDetails/:id',
