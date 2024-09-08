@@ -27,7 +27,7 @@ const Home = () => {
           </div>
         </div>
         <div className="flex-1 ">
-          <img src="/src/assets/Book_cover.png" alt="" />
+          <img src="https://upcdn.io/FW25cC1/raw/Book_cover.png" alt="" />
         </div>
       </div>
 
